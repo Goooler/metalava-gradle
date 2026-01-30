@@ -61,10 +61,15 @@ internal sealed class Module {
 
         override fun sourceSets(project: Project, variant: String?): FileCollection {
             val v = requireNotNull(libraryVariants[variant]) { "Variant '$variant' not found in $libraryVariants." }
+            val javaSources = v.sources.java?.all?.map {
+                it.filterNot { dir -> dir.asFile.name.contains(TEST_SOURCE_SET_NAME, ignoreCase = true) }
+            }
+            val kotlinSources = v.sources.kotlin?.all?.map {
+                it.filterNot { dir -> dir.asFile.name.contains(TEST_SOURCE_SET_NAME, ignoreCase = true) }
+            }
             return project.files()
-                .from(v.sources.java?.all)
-                .from(v.sources.kotlin?.all)
-                .filter { !it.name.contains(TEST_SOURCE_SET_NAME, ignoreCase = true) }
+                .from(javaSources)
+                .from(kotlinSources)
         }
     }
 
