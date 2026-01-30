@@ -47,6 +47,11 @@ internal sealed class Module {
          * The map of available library variants to be passed into [compileClasspath] so as to
          * filter its output.
          *
+         * This map is populated dynamically during the Android Gradle configuration phase,
+         * typically from an `onVariants` callback when each [LibraryVariant] is registered.
+         * Callers should therefore only rely on its contents after variant registration has
+         * completed.
+         *
          * @see compileClasspath
          */
         val libraryVariants: MutableMap<String, LibraryVariant> = mutableMapOf()
