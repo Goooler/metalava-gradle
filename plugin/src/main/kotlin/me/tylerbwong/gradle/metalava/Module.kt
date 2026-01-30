@@ -43,7 +43,7 @@ internal sealed class Module {
 
     class Android(val extension: LibraryAndroidComponentsExtension) : Module() {
         /**
-         * The list of available library variants to be passed into [compileClasspath] so as to
+         * The map of available library variants to be passed into [compileClasspath] so as to
          * filter its output.
          *
          * @see compileClasspath
