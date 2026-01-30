@@ -60,24 +60,8 @@ internal sealed class Module {
 
         override fun sourceSets(project: Project, variant: String?): FileCollection {
             val v = requireNotNull(libraryVariants[variant]) { "Variant '$variant' not found in $libraryVariants." }
-            val javaSources = project.files().from(
-                v.sources.java
-                    ?.all
-                    ?.filterNot {
-                        it.name
-                            .lowercase(Locale.getDefault())
-                            .contains("test")
-                    },
-            )
-            val kotlinSources = project.files().from(
-                v.sources.kotlin
-                    ?.all
-                    ?.filterNot {
-                        it.name
-                            .lowercase(Locale.getDefault())
-                            .contains("test")
-                    },
-            )
+            val javaSources = project.files().from(v.sources.java?.all)
+            val kotlinSources = project.files().from(v.sources.kotlin?.all)
             return javaSources + kotlinSources
         }
     }
