@@ -20,7 +20,7 @@ internal class MetalavaPlugin : Plugin<Project> {
                     androidModule.extension.onVariants { variant ->
                         val variantName = variant.name
                         androidModule.libraryVariants[variantName] = variant
-                        createMetalavaTasks(this, extension, currentModule, variantName)
+                        createMetalavaTasks(this@with, extension, currentModule, variantName)
                     }
                 }
             } else {
