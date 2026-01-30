@@ -15,7 +15,7 @@ internal class MetalavaPlugin : Plugin<Project> {
         if (currentModule != null) {
             val androidModule = (currentModule as? Module.Composite)?.extract<Module.Android>()
             if (androidModule != null) {
-                plugins.withId("com.android.base") {
+                plugins.withId("com.android.library") {
                     // Called in the withId block to fix `NoClassDefFoundError: com/android/build/api/variant/LibraryVariant`.
                     androidModule.extension.onVariants { variant ->
                         val variantName = variant.name
