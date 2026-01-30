@@ -8,6 +8,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.tasks.SourceSet
+import org.gradle.api.tasks.SourceSet.TEST_SOURCE_SET_NAME
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinSingleTargetExtension
@@ -60,9 +61,10 @@ internal sealed class Module {
 
         override fun sourceSets(project: Project, variant: String?): FileCollection {
             val v = requireNotNull(libraryVariants[variant]) { "Variant '$variant' not found in $libraryVariants." }
-            val javaSources = project.files().from(v.sources.java?.all)
-            val kotlinSources = project.files().from(v.sources.kotlin?.all)
-            return javaSources + kotlinSources
+            return project.files()
+                .from(v.sources.java?.all)
+                .from(v.sources.kotlin?.all)
+                .filter { !it.name.contains(TEST_SOURCE_SET_NAME, ignoreCase = true) }
         }
     }
 
