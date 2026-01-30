@@ -55,7 +55,7 @@ internal sealed class Module {
 
         override fun compileClasspath(project: Project, variant: String?): FileCollection {
             val v = requireNotNull(libraryVariants[variant]) { "Variant '$variant' not found in $libraryVariants." }
-            return v.compileClasspath
+            return v.compileClasspath.filter(File::exists)
         }
 
         override fun sourceSets(project: Project, variant: String?): FileCollection {
