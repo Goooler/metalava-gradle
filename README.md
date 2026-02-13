@@ -20,7 +20,7 @@ This plugin currently supports the following plugins:
 ```kt
 buildscript {
     repositories {
-        maven("https://plugins.gradle.org/m2/")
+        gradlePluginPortal()
     }
     dependencies {
         classpath("me.tylerbwong.gradle.metalava:plugin:<current_version>")
@@ -43,9 +43,7 @@ plugins {
 ```groovy
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        gradlePluginPortal()
     }
     dependencies {
         classpath "me.tylerbwong.gradle.metalava:plugin:<current_version>"
@@ -77,8 +75,8 @@ plugins {
 ...
 
 metalava {
-    format.set(Format.V4)
-    filename.set("api.txt")
+    format = Format.V4
+    filename = "api.txt"
     ...
 }
 ```
